@@ -14,7 +14,7 @@ namespace CarDealers.Controllers
             return View();
         }
 
-        public ActionResult Details()
+        public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
 
@@ -27,30 +27,6 @@ namespace CarDealers.Controllers
 
             return View();
         }
-        public ActionResult CarDealer()
-        {
-            /* var Carid = new List<string>();
-
-                 for (int i = 1;i <=10; i++)
-             {
-                 Carid.Add("Car " + i.ToString());
-             }
-             ViewBag.CarDealer = Carid;
-             */
-            var cars = new List<Cars>();
-            for (int i = 1; i <= 10; i++)
-            {
-                Cars car = new Cars();
-                car.Name = "car" + i.ToString();
-                cars.Add(car);
-            }
-
-                return View(cars);
-        }
-        public ActionResult Carsales(string carName)
-        {
-            ViewBag.carName = carName;
-            return View();
-        }
+        
     }
 }

@@ -9,8 +9,12 @@ using CarDealers.Controllers;
 
 namespace CarDealers.Tests.Controllers
 {
-    [TestClass]
+  
+
+[TestClass]
     public class HomeControllerTest
+   
+       
     {
         [TestMethod]
         public void Index()
@@ -32,7 +36,7 @@ namespace CarDealers.Tests.Controllers
             HomeController controller = new HomeController();
 
             // Act
-            ViewResult result = controller.Details() as ViewResult;
+            ViewResult result = controller.About() as ViewResult;
 
             // Assert
             Assert.AreEqual("Your application description page.", result.ViewBag.Message);

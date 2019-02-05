@@ -47,8 +47,9 @@ namespace CarDealers.Controllers
 
                 return View(cars);
         }
-        public ActionResult Carsales()
+        public ActionResult Carsales(string carName)
         {
+            ViewBag.carName = carName;
             return View();
         }
     }

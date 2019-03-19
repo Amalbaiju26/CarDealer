@@ -6,6 +6,7 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
 using CarDealers.Models;
+using System.Configuration;
 
 namespace CarDealers
 {
@@ -58,11 +59,11 @@ namespace CarDealers
             //   appId: "",
             //   appSecret: "");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = ConfigurationManager.AppSettings["GoogleClientID"],
+               ClientSecret = ConfigurationManager.AppSettings["GoogleClientSecret"]
+            });
         }
     }
 }

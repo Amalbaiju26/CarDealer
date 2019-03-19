@@ -10,10 +10,11 @@ using CarDealers.Models;
 
 namespace CarDealers.Controllers
 {
+    [Authorize]
     public class carsController : Controller
     {
         private DbModel db = new DbModel();
-
+        [AllowAnonymous]
         // GET: cars
         public ActionResult Index()
         {

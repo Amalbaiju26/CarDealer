@@ -7,9 +7,12 @@
 
 <h2>Cars</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+@if (Request.IsAuthenticated)
+{
+  <p>
+      @Html.ActionLink("Create New", "Create")
+  </p>
+}
 <table class="table">
     <tr>
         <th>
@@ -21,7 +24,10 @@
         <th>
             @Html.DisplayNameFor(model => model.color)
         </th>
-        <th></th>
+        @if (Request.IsAuthenticated)
+        {
+            <th>update</th>
+        }
     </tr>
 
 @foreach (var item in Model) {
@@ -35,12 +41,18 @@
         <td>
             @Html.DisplayFor(modelItem => item.color)
         </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.carno }) |
-            @Html.ActionLink("Details", "Details", new { id=item.carno }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.carno })
-        </td>
-    </tr>
+
+        @if (Request.IsAuthenticated)
+        {
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.carno });
+
+                @Html.ActionLink("Details", "Details", new { id = item.carno });
+
+                @Html.ActionLink("Delete", "Delete", new { id = item.carno });
+            </td>
+        }
+        </tr>
 }
 
 </table>

@@ -8,6 +8,8 @@ namespace CarDealers
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
             filters.Add(new HandleErrorAttribute());
+            //force all request to use ssl
+            
         }
     }
 }

@@ -10,6 +10,7 @@ using CarDealers.Models;
 
 namespace CarDealers.Controllers
 {
+    [Authorize]
     public class carspecsController : Controller
     {
         private DbModel db = new DbModel();

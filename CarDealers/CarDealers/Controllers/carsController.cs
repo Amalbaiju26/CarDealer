@@ -13,12 +13,25 @@ namespace CarDealers.Controllers
     [Authorize(Roles = "Administrator")]
     public class carsController : Controller
     {
-        private DbModel db = new DbModel();
+       // private DbModel db = new DbModel();
+         
+        IMockCars db;
+
+       //constructor
+       //defaulf 
+       public carsController(IMockCars @object)
+        {
+            this.db = new IDataCars();
+        }
+        public carsController(IDataCars mockDb)
+        {
+            this.db = mockDb;
+        }
         [AllowAnonymous]
         // GET: cars
         public ActionResult Index()
         {
-            return View(db.cars.ToList());
+            return View("index",db.Cars.ToList());
         }
 
         // GET: cars/Details/5
@@ -28,7 +41,8 @@ namespace CarDealers.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            car car = db.cars.Find(id);
+            // car car = db.Cars.Find(id);
+            car car = db.Cars.SingleOrDefault(c => c.carno == id);
             if (car == null)
             {
                 return HttpNotFound();
@@ -51,8 +65,9 @@ namespace CarDealers.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.cars.Add(car);
-                db.SaveChanges();
+                // db.Cars.Add(car);
+                //db.SaveChanges();
+                db.save(car);
                 return RedirectToAction("Index");
             }
 
@@ -60,18 +75,18 @@ namespace CarDealers.Controllers
         }
 
         // GET: cars/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(car car, int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            car car = db.cars.Find(id);
-            if (car == null)
+            //car car = db.Cars.Find(id);
+            if (id == null)
             {
                 return HttpNotFound();
             }
-            return View(car);
+            return View(id );
         }
 
         // POST: cars/Edit/5
@@ -83,8 +98,9 @@ namespace CarDealers.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(car).State = EntityState.Modified;
-                db.SaveChanges();
+                //  db.Entry(car).State = EntityState.Modified;
+                // db.SaveChanges();
+                db.save(car);
                 return RedirectToAction("Index");
             }
             return View(car);
@@ -97,7 +113,8 @@ namespace CarDealers.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            car car = db.cars.Find(id);
+            //  car car = db.Cars.Find(id);
+            car car = db.Cars.SingleOrDefault(c => c.carno == id);
             if (car == null)
             {
                 return HttpNotFound();
@@ -110,9 +127,11 @@ namespace CarDealers.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            car car = db.cars.Find(id);
-            db.cars.Remove(car);
-            db.SaveChanges();
+            //car car = db.Cars.Find(id);
+            car car = db.Cars.SingleOrDefault(c => c.carno == id);
+            // db.Cars.Remove(car);
+            //db.SaveChanges();
+            db.Delete(car);
             return RedirectToAction("Index");
         }
 

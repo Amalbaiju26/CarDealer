@@ -5,6 +5,7 @@ namespace CarDealers.Models
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
+    using System.Linq;
 
     [Table("car")]
     public partial class car
@@ -30,5 +31,10 @@ namespace CarDealers.Models
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<carspec> carspecs { get; set; }
+
+        //public static IQueryable<car> AsQueryable()
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

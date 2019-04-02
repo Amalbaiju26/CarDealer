@@ -9,7 +9,7 @@ namespace CarDealers
         {
             filters.Add(new HandleErrorAttribute());
             //force all request to use ssl
-            filters.Add(new RequireHttpsAttribute());
+            //filters.Add(new RequireHttpsAttribute());
         }
     }
 }

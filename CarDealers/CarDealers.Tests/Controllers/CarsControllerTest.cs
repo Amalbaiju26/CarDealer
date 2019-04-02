@@ -144,6 +144,17 @@ namespace CarDealers.Tests.Controllers
             Assert.AreEqual("Index", resultlist[0].Value);
 
         }
+        [TestMethod]
+        public void CreateRedirectViewLoads()
+        {
+            car product1 = new car { carno = 1, Name = "pajero",price = 2000, color = "yellow"};
 
+            //act
+            //ActionResult result = controller.Create() as ActionResult;
+            //ViewResult result = controller.Create("Product 1", "Description 1", 20, "null", 101) as ViewResult;
+            RedirectToRouteResult result = controller.Create(product1) as RedirectToRouteResult;
+            //assert
+            Assert.AreEqual("Index", result.RouteValues["action"]);
+        }
     }
 }

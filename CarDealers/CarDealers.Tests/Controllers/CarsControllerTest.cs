@@ -32,28 +32,118 @@ namespace CarDealers.Tests.Controllers
             //object
             controller = new carsController(mock.Object);
         }
-        // [TestMethod]
-        //public void LoadsindexView()
-        //{
-        //    ViewResult result = controller.Index() as ViewResult;
-        //    //assert
-        //    Assert.AreEqual("Index", result.ViewName);
-        //}
-        //[TestMethod]
-        //public void IndexLoadsCar()
-        //{
-        //    var result =(List<car>)((ViewResult)controller.Index()).Model;
-        //    CollectionAssert.AreEqual(Car, result);
-        //}
-        //    [TestMethod]
-        //    //public void  EditPostIndexViewLoads()
-        //    //{
-        //    //    // act
-        //    //    RedirectToRouteResult result = controller.Edit(Car[0]) as RedirectToRouteResult;
+       
+        [TestMethod]
+        public void EditViewName()
+        {
+            controller.ModelState.AddModelError("Deatails", "error");
+            // act
+            ViewResult result = controller.Edit(Car[0]) as ViewResult;
 
-        //    //    // assert
-        //    //    Assert.IsNotNull(result);
-        //    //}
-        //}
+            // assert
+            Assert.AreEqual("Edit", result.ViewName);
+        }
+        [TestMethod]
+        public void EditViewLoads()
+        {
+            controller.ModelState.AddModelError("Deatails", "error");
+            // act
+            ViewResult result = controller.Edit(Car[0]) as ViewResult;
+
+            // assert
+            Assert.IsNotNull(result);
+        }
+        [TestMethod]
+        public void CreateLoads()
+        {
+            // Arrange
+            controller = new carsController();
+
+            // Act
+            ViewResult result = controller.Create() as ViewResult;
+
+            // Assert
+            Assert.AreEqual("Create", result.ViewName);
+        }
+        [TestMethod]
+
+        public void DetailsId()
+
+        {
+
+            //Act
+
+            HttpStatusCodeResult res = controller.Details(null) as HttpStatusCodeResult;
+
+            //Assert
+
+            Assert.AreEqual(500, res.StatusCode);
+
+        }
+        [TestMethod]
+
+        public void DetailsCars()
+
+        {
+
+            //Act
+
+            HttpNotFoundResult res = controller.Details(200) as HttpNotFoundResult;
+
+            //Assert
+
+            Assert.AreEqual(004, res.StatusCode);
+
+        }
+
+
+        [TestMethod]
+
+        public void Carsview()
+
+        {
+
+            //Act
+
+            var res = ((ViewResult)controller.Details(123)).Model;
+
+            //Assert
+
+            Assert.AreEqual(Car.SingleOrDefault(p => p.carno == 45), res);
+
+        }
+        [TestMethod]
+
+        public void Check()
+
+        {
+
+            // act
+
+            RedirectToRouteResult result = controller.DeleteConfirmed(500) as RedirectToRouteResult;
+            
+            var resultlist = result.RouteValues.ToArray();
+
+            // assert
+
+            Assert.AreEqual("Index", resultlist[0].Value);
+
+        }
+        [TestMethod]
+
+        public void CheckInvalidIdRedirect()
+
+        {
+
+            RedirectToRouteResult result = controller.DeleteConfirmed(700) as RedirectToRouteResult;
+
+
+            var resultlist = result.RouteValues.ToArray();
+
+
+            Assert.AreEqual("Index", resultlist[0].Value);
+
+        }
+
     }
 }

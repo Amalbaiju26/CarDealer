@@ -27,6 +27,11 @@ namespace CarDealers.Controllers
         {
             this.db = mockDb;
         }
+
+        public carsController()
+        {
+        }
+
         [AllowAnonymous]
         // GET: cars
         public ActionResult Index()
@@ -53,7 +58,7 @@ namespace CarDealers.Controllers
         // GET: cars/Create
         public ActionResult Create()
         {
-            return View();
+            return View("Create");
         }
 
         // POST: cars/Create
@@ -67,7 +72,7 @@ namespace CarDealers.Controllers
             {
                 // db.Cars.Add(car);
                 //db.SaveChanges();
-                db.save(car);
+                db.Save(car);
                 return RedirectToAction("Index");
             }
 
@@ -100,10 +105,10 @@ namespace CarDealers.Controllers
             {
                 //  db.Entry(car).State = EntityState.Modified;
                 // db.SaveChanges();
-                db.save(car);
+                db.Save(car);
                 return RedirectToAction("Index");
             }
-            return View(car);
+            return View("Edit",car);
         }
 
         // GET: cars/Delete/5

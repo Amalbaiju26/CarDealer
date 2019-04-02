@@ -9,7 +9,7 @@ namespace CarDealers.Models
     public interface IMockCars
     {
         IQueryable<car> Cars{get;}
-        car save(car car);
+        car Save(car car);
         void Delete(car car);
         void Dispose();
     }
